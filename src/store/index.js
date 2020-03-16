@@ -11,7 +11,15 @@ const vuexLocal = new VuexPersistence({
 
 export default new Vuex.Store({
   state: {
-    stickies: [],
+    stickies: [
+      {
+        id: 1,
+        title: 'I <3 Vue.js',
+        body: 'Made with Vue.js, Vuex, Buefy',
+        pinned: true,
+        completed: true
+      }
+    ],
   },
   mutations: {
     SET_PINNED(state, id) {

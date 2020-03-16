@@ -2,7 +2,8 @@
   <section class="section">
     <div class="field">
       <a
-        class="button is-white is-outlined"
+        id="add"
+        class="button is-dark is-inverted is-outlined"
         href="#"
         @click="isFormModal = true"
       >
@@ -168,8 +169,10 @@ export default {
 
 <style scoped>
 #add {
-  position: absolute;
-  top: 90vh;
+  border-width: 2px;
+  border-style: solid;
+  border-image: linear-gradient(45deg, #43a680,#4d7ea8) 1 1 1 1;
+  box-sizing: border-box;
 }
 
 .sticky {
