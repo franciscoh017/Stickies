@@ -1,0 +1,156 @@
+<template>
+  <div>
+    <a id="add" class="" href="#" @click="isFormModal = true">
+      <img src="@/assets/Add.svg" />
+    </a>
+    <h1 class="heading has-text-white has-text-weight-bold">Pinned</h1>
+    <div id="pinned">
+      <ul
+        class="columns is-multiline"
+        v-for="(stickie, index) in pinnedStickies"
+        :key="index"
+      >
+        <li class="column is-5">
+          <Sticky
+            class="sticky"
+            :id="stickie.id"
+            :index="index"
+            :title="stickie.title"
+            :body="stickie.body"
+            :completed.sync="stickie.completed"
+            :pinned.sync="stickie.pinned"
+          />
+        </li>
+      </ul>
+    </div>
+    <br />
+    <h1 class="heading has-text-white has-text-weight-bold">Other</h1>
+    <div id="other">
+      <ul
+        class="columns is-multiline"
+        v-for="(stickie, index) in otherStickies"
+        :key="index"
+      >
+        <li class="column is-5">
+          <Sticky
+            class="sticky"
+            :id="stickie.id"
+            :index="index"
+            :title="stickie.title"
+            :body="stickie.body"
+            :completed.sync="stickie.completed"
+            :pinned.sync="stickie.pinned"
+          />
+        </li>
+      </ul>
+    </div>
+    <b-modal :active.sync="isFormModal">
+      <form @submit.prevent="processSticky()" action="">
+        <div class="modal-card" style="width: auto">
+          <header class="modal-card-head">
+            <p class="modal-card-title">
+              Create New
+            </p>
+          </header>
+          <section class="modal-card-body has-background-bluegrey">
+            <div class="field">
+              <label class="label has-text-white">Title</label>
+              <div class="control">
+                <input
+                  class="input"
+                  v-model="currentSticky.title"
+                  type="text"
+                  placeholder="Task Title"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label has-text-white">Desription</label>
+              <div class="control">
+                <textarea
+                  v-model="currentSticky.body"
+                  class="textarea"
+                  type="text"
+                  placeholder="Task Description"
+                />
+              </div>
+            </div>
+            <b-checkbox v-model="currentSticky.pinned"
+              ><p class="has-text-white">Pinned</p></b-checkbox
+            >
+          </section>
+          <footer class="modal-card-foot">
+            <button type="submit" class="button is-primary">Save</button>
+          </footer>
+        </div>
+      </form>
+    </b-modal>
+  </div>
+</template>
+
+<script>
+import Sticky from "../Sticky/Sticky.vue";
+import { mapGetters, mapActions } from "vuex";
+export default {
+  name: "Stickies",
+  components: {
+    Sticky
+  },
+  data() {
+    return {
+      stickies: [],
+      isFormModal: false,
+      currentSticky: {
+        id: null,
+        title: null,
+        body: null,
+        pinned: false,
+        completed: false
+      }
+    };
+  },
+  computed: {
+    ...mapGetters(["pinnedStickies", "otherStickies"])
+  },
+  methods: {
+    ...mapActions(["getStickies", "createSticky"]),
+    showUpdateModal(sticky) {
+      this.currentSticky = {
+        id: sticky.id,
+        title: sticky.title,
+        body: sticky.body,
+        pinned: sticky.pinned,
+        completed: sticky.completed
+      };
+      this.isFormModal = true;
+    },
+    processSticky() {
+      const id = Math.floor(Math.random() * Date.now());
+      this.currentSticky.id = id;
+      this.createSticky(this.currentSticky);
+      this.isFormModal = false;
+      this.clearForm();
+    },
+    clearForm() {
+      this.currentSticky = {
+        id: null,
+        title: null,
+        body: null,
+        pinned: false,
+        completed: false
+      };
+    }
+  }
+};
+</script>
+
+<style scoped>
+#add {
+  position: absolute;
+  top: 90vh;
+}
+
+.sticky {
+  cursor: pointer;
+}
+</style>

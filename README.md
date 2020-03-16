@@ -1,4 +1,9 @@
-# stickies
+# Stickies
+Stickies is a TodoList frontend project designed to preview Vue.js and Vuex capabilities. 
+
+Designed using figma software, Bulma and Buefy.
+
+[Live Demo](https://franciscoh017.github.io/stickies/)
 
 ## Project setup
 ```
@@ -27,3 +32,9 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## License
+
+[MIT](http://opensource.org/licenses/MIT)
+
+Copyright (c) 2020, Francisco Hernandez
