@@ -4,7 +4,7 @@
       <img src="@/assets/Add.svg" />
     </a>
     <h1 class="heading has-text-white has-text-weight-bold">Pinned</h1>
-    <div id="pinned">
+    <div id="pinned" v-if="pinnedStickies.length > 0">
       <ul
         class="columns is-multiline"
         v-for="(stickie, index) in pinnedStickies"
@@ -23,9 +23,14 @@
         </li>
       </ul>
     </div>
+    <div v-else>
+      <section class="section has-text-centered">
+        <span class="has-text-grey-light"> Pin an <b>important</b> Sticky here.</span>
+      </section>
+    </div>
     <br />
     <h1 class="heading has-text-white has-text-weight-bold">Other</h1>
-    <div id="other">
+    <div id="other" v-if="otherStickies.length > 0">
       <ul
         class="columns is-multiline"
         v-for="(stickie, index) in otherStickies"
@@ -43,6 +48,11 @@
           />
         </li>
       </ul>
+    </div>
+    <div v-else>
+      <section class="section has-text-centered">
+        <span class="has-text-grey-light"> <b>Create</b> a Sticky to get started.</span>
+      </section>
     </div>
     <b-modal :active.sync="isFormModal">
       <form @submit.prevent="processSticky()" action="">
