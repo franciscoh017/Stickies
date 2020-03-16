@@ -1,9 +1,9 @@
 <template>
   <div>
     <Navbar />
-    <section id="content" class="section has-background-bluegrey">
+    <div id="content" class="has-background-bluegrey">
       <Stickies />
-    </section>
+    </div>
   </div>
 </template>
 

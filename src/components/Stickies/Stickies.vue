@@ -1,8 +1,16 @@
 <template>
-  <div>
-    <a id="add" class="" href="#" @click="isFormModal = true">
-      <img src="@/assets/Add.svg" />
-    </a>
+  <section class="section">
+    <div class="field">
+      <a
+        class="button is-white is-outlined"
+        href="#"
+        @click="isFormModal = true"
+      >
+        <span class="icon"> <i class="fas fa-plus"></i></span>
+        <span>Add</span>
+      </a>
+    </div>
+
     <h1 class="heading has-text-white has-text-weight-bold">Pinned</h1>
     <div id="pinned" v-if="pinnedStickies.length > 0">
       <ul
@@ -25,7 +33,9 @@
     </div>
     <div v-else>
       <section class="section has-text-centered">
-        <span class="has-text-grey-light"> Pin an <b>important</b> Sticky here.</span>
+        <span class="has-text-grey-light">
+          Pin an <b>important</b> Sticky here.</span
+        >
       </section>
     </div>
     <br />
@@ -51,7 +61,9 @@
     </div>
     <div v-else>
       <section class="section has-text-centered">
-        <span class="has-text-grey-light"> <b>Create</b> a Sticky to get started.</span>
+        <span class="has-text-grey-light">
+          <b>Create</b> a Sticky to get started.</span
+        >
       </section>
     </div>
     <b-modal :active.sync="isFormModal">
@@ -95,7 +107,7 @@
         </div>
       </form>
     </b-modal>
-  </div>
+  </section>
 </template>
 
 <script>
