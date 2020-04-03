@@ -3,7 +3,7 @@
     <div class="field">
       <a
         id="add"
-        class="button is-dark is-inverted is-outlined"
+        class="button is-white is-inverted"
         href="#"
         @click="isFormModal = true"
       >
@@ -16,10 +16,9 @@
     <div id="pinned" v-if="pinnedStickies.length > 0">
       <ul
         class="columns is-multiline"
-        v-for="(stickie, index) in pinnedStickies"
-        :key="index"
       >
-        <li class="column is-5">
+        <li class="column is-3" v-for="(stickie, index) in pinnedStickies"
+        :key="index">
           <Sticky
             class="sticky"
             :id="stickie.id"
@@ -44,10 +43,9 @@
     <div id="other" v-if="otherStickies.length > 0">
       <ul
         class="columns is-multiline"
-        v-for="(stickie, index) in otherStickies"
-        :key="index"
       >
-        <li class="column is-5">
+        <li class="column is-3" v-for="(stickie, index) in otherStickies"
+        :key="index">
           <Sticky
             class="sticky"
             :id="stickie.id"
@@ -71,7 +69,7 @@
       <form @submit.prevent="processSticky()" action="">
         <div class="modal-card" style="width: auto">
           <header class="modal-card-head">
-            <p class="modal-card-title">
+            <p class="modal-card-title has-text-white">
               Create New
             </p>
           </header>
@@ -84,6 +82,7 @@
                   v-model="currentSticky.title"
                   type="text"
                   placeholder="Task Title"
+                  required
                 />
               </div>
             </div>
@@ -95,15 +94,16 @@
                   class="textarea"
                   type="text"
                   placeholder="Task Description"
+                  required
                 />
               </div>
             </div>
-            <b-checkbox v-model="currentSticky.pinned"
+            <b-checkbox v-model="currentSticky.pinned" type="is-info"
               ><p class="has-text-white">Pinned</p></b-checkbox
             >
           </section>
           <footer class="modal-card-foot">
-            <button type="submit" class="button is-primary">Save</button>
+            <button type="submit" class="button is-white is-inverted">Save</button>
           </footer>
         </div>
       </form>

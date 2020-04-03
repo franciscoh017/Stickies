@@ -4,7 +4,7 @@
       <form @submit.prevent="SaveAndClose()">
         <div class="modal-card" style="width: auto">
           <header class="modal-card-head">
-            <p class="modal-card-title">
+            <p class="modal-card-title has-text-white">
               Update
             </p>
           </header>
@@ -17,6 +17,7 @@
                   v-model="data.title"
                   type="text"
                   placeholder="Task Title"
+                  required
                 />
               </div>
             </div>
@@ -28,18 +29,19 @@
                   class="textarea"
                   type="text"
                   placeholder="Task Description"
+                  required
                 />
               </div>
             </div>
-            <b-checkbox v-model="data.completed"
+            <b-checkbox v-model="data.completed" type="is-success"
               ><p class="has-text-white">Completed</p></b-checkbox
             >
-            <b-checkbox v-model="data.pinned"
+            <b-checkbox v-model="data.pinned" type="is-info"
               ><p class="has-text-white">Pinned</p></b-checkbox
             >
           </section>
           <footer class="modal-card-foot">
-            <button type="submit" class="button is-primary">Save</button>
+            <button type="submit" class="button is-white is-inverted">Save</button>
           </footer>
         </div>
       </form>
@@ -54,7 +56,7 @@
           <!-- Left side -->
           <div class="level-left">
             <div class="level-item">
-              <span @click="toggleComplete(id)" id="complete">
+              <span @click="toggleComplete(id)" class="option">
                 <p v-if="!completed" class="subtitle is-5">
                   <img src="@/assets/Check.svg" />
                 </p>
@@ -62,7 +64,7 @@
                   <img src="@/assets/Check 2.svg" />
                 </p>
               </span>
-              <span @click="togglePinned(id)" id="pin">
+              <span @click="togglePinned(id)" class="option">
                 <p v-if="pinned" class="subtitle is-5">
                   <span class="icon pinned">
                     <i class="fas fa-thumbtack"></i>
@@ -76,8 +78,8 @@
               </span>
               <p class="level-item">
                 <a
-                  @click="editModalActive = true"
-                  class="has-text-white has-size-5 has-text-weight-bold"
+                  @click="activateEditMode()"
+                  class="has-text-white has-size-5 has-text-weight-bold option"
                 >
                   <span class="icon">
                     <i class="fas fa-pencil-alt"></i>
@@ -148,10 +150,10 @@ export default {
       editModalActive: false,
       data: {
         id: this.id,
-        title: this.title,
-        body: this.body,
-        completed: this.completed,
-        pinned: this.pinned
+        title: null,
+        body: null,
+        completed: null,
+        pinned: null
       }
     };
   },
@@ -162,6 +164,13 @@ export default {
       "deleteSticky",
       "updateSticky"
     ]),
+    activateEditMode() {
+      this.data.title = this.title;
+      this.data.body = this.body;
+      this.data.completed = this.completed;
+      this.data.pinned = this.pinned;
+      this.editModalActive = true;
+    },
     SaveAndClose() {
       this.updateSticky(this.data);
       this.editModalActive = false;
@@ -175,16 +184,18 @@ export default {
   transform: rotate(45deg) !important;
   color: #4d7ea8 !important;
 }
-#complete {
-  margin-right: 0.35rem;
-}
-.complete {
-  text-decoration: line-through;
-}
+
 .complete-box {
   border-width: 3px;
   border-style: solid;
   border-image: linear-gradient(to bottom, #43a680, rgba(0, 0, 0, 0)) 1 100%;
   box-sizing: border-box;
+}
+
+.option {
+  margin-right: 0.35rem;
+}
+.complete {
+  text-decoration: line-through;
 }
 </style>

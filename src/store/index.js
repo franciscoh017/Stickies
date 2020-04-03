@@ -15,9 +15,9 @@ export default new Vuex.Store({
       {
         id: 1,
         title: 'I <3 Vue.js',
-        body: 'Made with Vue.js, Vuex, Buefy',
-        pinned: true,
-        completed: true
+        body: 'Stickies by franciscoh017',
+        completed: true,
+        pinned: true
       }
     ],
   },
